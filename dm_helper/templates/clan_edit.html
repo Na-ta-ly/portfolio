@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ char.name }}{% endblock %}
+
+{% block body -%}
+    <h1>Редактирование групп персонажа {{ char.name }}</h1>
+    <form>
+        <table class="groups" align="center">
+            <tr class="groups">
+                <th class="groups">Группы персонажа</th>
+                <th class="groups">Доступные группы</th>
+                <th class="groups">Новые группы</th>
+            </tr>
+            <tr class="groups">
+                <td class="groups">
+                    <select name="groups" size="10" multiple>
+                        {% for item in char.groups %}
+                        <option value="{{ item.name }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <input type="submit" id='del_group' name='del_group' value="Удалить" formmethod="POST"
+                           formaction="{{ url_for('get_groups', opt='del', char_id=char.id) }}" >
+                </td>
+                <td  class="groups">
+                    <select name="all_groups" size="10" multiple>
+                        {% for item in groups %}
+                        <option value="{{ item.name }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <input type="submit" id='add_group' name='add_group' value="Добавить" formmethod="POST"
+                           formaction="{{ url_for('get_groups', opt='add', char_id=char.id) }}" >
+                </td>
+                <td class="groups">
+                    <input type='text' maxlength=200 size=25 name="new_group_1"><br>
+                    <input type='text' maxlength=200 size=25 name="new_group_2"><br>
+                    <input type='text' maxlength=200 size=25 name="new_group_3">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Сохранить группы" formaction="{{ url_for('one_character', char_id=char.id) }}"
+            formmethod="GET">
+    </form>
+{%- endblock %}

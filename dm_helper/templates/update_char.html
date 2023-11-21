@@ -1,0 +1,22 @@
+{% extends 'edit_char.html' %}
+
+{% block clan -%}
+                <tr>
+                    <td><label>Clan:</label></td>
+                    <td>
+                        <input type="submit" value="Изменить группы" formmethod="GET"
+                            formaction="{{ url_for('get_groups', char_id=char.id) }}">
+                    </td>
+                </tr>
+{%- endblock %}
+
+{% block menu -%}
+                <table class="no_border">
+                    <tr class="no_border">
+                        <td class="no_border">
+                            <input type="submit" value="Изменить персонажа" formmethod="POST"
+                                formaction="{{ url_for('edit_character', char_id=char.id) }}">
+                        </td>
+                    </tr>
+                </table>
+{%- endblock %}

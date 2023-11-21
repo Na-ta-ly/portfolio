@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}База персонажей{% endblock %}
+
+{% block body %}
+    <h1>База персонажей</h1>
+    <table class="base">
+        <tr class="base_tr">
+            <th width="80%">Имя</th>
+            <th>Раса</th>
+        </tr>
+        {% for item in items %}
+        <tr class="base_tr">
+            <td width="80%"><a href="{{ url_for('one_character', char_id=item.id) }}">{{ item.name }}</a></td>
+            <td>{{ item.race.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div class="form">
+        <form action="{{ url_for('new_character') }}" method="GET">
+            <input type="submit" value="Новый персонаж">
+        </form>
+    </div>
+{% endblock %}

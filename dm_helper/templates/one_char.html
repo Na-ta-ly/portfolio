@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ char.name }}{% endblock %}
+
+{% block body -%}
+    <h1>Карточка персонажа</h1>
+    <a href="{{ url_for('home') }}">К списку персонажей</a>
+    <div class="form" >
+        <form>
+            <table>
+                <tr>
+                    <td><label>Имя:</label></td>
+                    <td>
+                        <input {% block name %}{% endblock %} type='text' maxlength=200 size=62 name="name"
+                            value="{{ char.name }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Раса:</label></td>
+                    <td>
+                        {% block race %}{% endblock %}
+                    </td>
+                </tr>
+                {% block clan %}{% endblock %}
+                <tr>
+                    <td><label>Деньги:</label></td>
+                    <td>
+                        <table class="money">
+                            <tr class="money">
+                                <td class="money">
+                                    <input type="number" name="money" value="{{ char.money }}">
+                                </td>
+                                {% block money_change %}{% endblock %}
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Валюта:</label></td>
+                    <td>
+                        <table class="money">
+                            <tr class="money">
+                                <td class="money">
+                                    <input type="number" name="currency" value="{{ char.currency }}">
+                                </td>
+                                {% block currency_change %}{% endblock %}
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Предметы:</label></td>
+                    <td>
+                        <textarea {% block items %}{% endblock %} maxlength=500 rows=10 cols="60"
+                                  name="items">{{ char.items }}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Описание:</label></td>
+                    <td>
+                        <textarea {% block description %}{% endblock %} maxlength=800 rows=10 cols="60"
+                                  name="description">{{ char.description }}</textarea>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            {% block menu %}{% endblock %}
+        </form>
+    </div>
+{%- endblock %}

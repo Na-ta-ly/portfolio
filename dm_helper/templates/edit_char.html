@@ -1,0 +1,14 @@
+{% extends 'one_char.html' %}
+
+{% block race -%}
+                        <select name="race">
+                        {%- for item in races %}
+                            {% if item==char.race -%}<option selected value="{{ item.name }}">{{ item.name }}</option>
+                            {%- else %}<option value="{{ item.name }}">{{ item.name }}</option>
+                            {%- endif %}
+                        {%- endfor %}
+                        </select>
+                        <br>
+                        <label>Новая раса</label>
+                        <input type='text' maxlength=200 size=62 name="new_race" >
+{%- endblock %}

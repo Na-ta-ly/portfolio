@@ -1,0 +1,67 @@
+{% extends 'one_char.html' %}
+
+{% block name %}readonly{% endblock %}
+
+{% block race -%}
+<input readonly type='text' maxlength=200 size=62 name="race" value="{{ char.race.name }}">
+{%- endblock %}
+
+{% block clan -%}
+                <tr>
+                    <td width=""><label>Группы:</label></td>
+                    <td>
+                        <select name="groups" size="3">
+                            {% for item in char.groups %}
+                            <option value="{{ item.name }}">{{ item.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+{%- endblock %}
+
+{% block money_change -%}
+                                <td class="money">
+                                    <input type="submit" id='money_sub' name='money_sub' value="-" formmethod="POST"
+                                           formaction="{{ url_for('one_character', opt='sub', char_id=char.id,
+                                            account='money') }}">
+                                    <input type="number" name="money_delta" value="0">
+                                    <input type="submit" id='money_add' name='money_add' value="+" formmethod="POST"
+                                           formaction="{{ url_for('one_character', opt='add', char_id=char.id,
+                                            account='money') }}">
+                                </td>
+{%- endblock %}
+
+{% block currency_change -%}
+                                <td class="money">
+                                    <input type="submit" id='currency_sub' name='currency_sub' value="-"
+                                           formmethod="POST" formaction="{{ url_for('one_character', opt='sub',
+                                           char_id=char.id, account='currency') }}">
+                                    <input type="number" name="currency_delta" value="0">
+                                    <input type="submit" id='currency_add' name='currency_add' value="+"
+                                           formmethod="POST" formaction="{{ url_for('one_character', opt='add',
+                                           char_id=char.id, account='currency') }}">
+                                </td>
+{%- endblock %}
+
+{% block items %}{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block menu -%}
+                <table class="no_border">
+                    <tr class="no_border">
+                        <td class="no_border">
+                            <input type="submit" value="Редактировать персонажа" formmethod="GET"
+                                   formaction="{{ url_for('edit_character', char_id=char.id) }}" >
+                        </td>
+                        <td class="no_border">
+                            <input type="submit" value="Удалить персонажа" formmethod="POST"
+                                   formaction="{{ url_for('delete_character', char_id=char.id) }}" >
+                        </td>
+                        <td class="no_border">
+                            <input type="submit" value="Сохранить персонажа" formmethod="POST"
+                                   formaction="{{ url_for('one_character', char_id=char.id) }}" >
+                        </td>
+                    </tr>
+                </table>
+{%- endblock %}
